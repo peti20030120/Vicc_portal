@@ -1,0 +1,13 @@
+# Funkcionalitás
+- Regisztráció
+- Bejelentkezés
+- Vicc like-olás
+- Vicchez hozzászólás
+- Vicc írás
+- Vicc olvasás
+- Vicc keresés
+- Nem lehet több egy vicc mint 100 char. 
+- Sötétkék, fehér, fekete színkombinációk
+- Profilok megtekintése
+- Barát hozzáadása
+- Barát törlése
