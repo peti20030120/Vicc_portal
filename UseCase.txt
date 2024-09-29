@@ -1,0 +1,34 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor "Felhasználó" as a1
+rectangle "Regisztrációs/bejelentkezős oldal" {
+  a1 --> (Regisztráció)
+  a1 --> (Bejelentkezés)
+  (Bejelentkezés) --> (Sikeres bejelentkezés)
+  (Bejelentkezés) --> (Sikertelen bejelentkezés)
+  (Regisztráció) --> (Sikeres regisztráció)
+  (Regisztráció) --> (Sikertelen regisztráció)
+  (Sikertelen bejelentkezés) --> (Bejelentkezés)
+  (Sikertelen regisztráció) --> (Regisztráció)
+
+  (Bejelentkezés) ..> (Regisztráció) : <<include>>
+}
+rectangle "Főoldal" {
+  (Sikeres bejelentkezés) --> Főoldal
+  (Sikeres regisztráció) --> Főoldal
+  a1 --> (Vicc keresés)
+  a1 --> (Vicc likeolás)
+  a1 --> (Vicchez hozzászólás)
+  a1 --> (Vicc olvasás)
+  a1 --> (Vicc írás)
+  a1 --> (Viccíró profiljának megtekintése)
+  (Vicc keresés) ..> (Vicc olvasás) : <<extends>>
+}
+
+rectangle "Barátok" {
+  (Viccíró profiljának megtekintése) --> Barátok
+  a1 --> (Barát hozzáadás)
+  a1 --> (Barát törlés)
+}
+@enduml
