@@ -485,7 +485,12 @@
       }
     ],
     "friends": [
-      20
+      10,
+      2,
+      6,
+      7,
+      4,
+      34
     ],
     "bio": "This is the bio for User1. They enjoy programming and sharing jokes."
   },
@@ -3685,7 +3690,7 @@
         "updatedAt": "2024-09-03T11:01:38.981709",
         "userId": 10,
         "likes": {
-          "count": 75,
+          "count": 74,
           "likedByUsers": [
             52,
             19,
@@ -3744,7 +3749,6 @@
             65,
             9,
             32,
-            1,
             53,
             41,
             23,
@@ -3799,6 +3803,20 @@
             "userId": 99,
             "createdAt": "2024-09-24T11:01:38.981709",
             "likeCount": 2
+          },
+          {
+            "id": 6,
+            "text": "dsfsdffdff",
+            "userId": 1,
+            "createdAt": "2024-09-29T17:42:17.671Z",
+            "likeCount": 0
+          },
+          {
+            "id": 7,
+            "text": "asdaf",
+            "userId": 1,
+            "createdAt": "2024-09-29T17:44:08.540Z",
+            "likeCount": 0
           }
         ]
       },

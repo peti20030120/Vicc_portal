@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './pages/Navbar';
 import JokeFeed from './pages/JokeFeed';
@@ -104,16 +104,23 @@ const App = () => {
   const [data, setData] = useState<UserDTO[]>([]);
   const [liked,  setLiked] = useState<boolean>(false);
   const [filteredUsers, setFilteredUsers] = useState<UserDTO[]>([]);
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const datas = await getAllData();
-      setData(datas);
-      if (!currentUser) setFilteredUsers(datas);
-    };
-  
-    fetchData();
+  const fetchData = useCallback( async () => {
+    console.log('fetching data');
+    const datas = await getAllData();
+    setData(datas);
+    setRefresh(false);
   }, [currentUser]);
+  
+  useEffect(() => {
+    fetchData();
+  }, [refresh, refreshTrigger]);
+
+  const triggerRefresh = useCallback(() => {
+    setRefreshTrigger(prev => prev + 1);
+  }, []);
 
   useEffect(() => {
     if (Array.isArray(data)) {
@@ -142,9 +149,13 @@ const App = () => {
     try {
       handleLike(userId, jokeId, currentUser.id);
       setData(await getAllData());
-    } catch (error) {
+      setRefresh(true);
+      triggerRefresh();
+  } catch (error) {
       console.error('Error liking joke:', error);
     }
+    setRefresh(false);
+    await getAllData();
   };
 
   const handleCommentSubmit = async (userId: number, jokeId: number, comment: string) => {
@@ -152,9 +163,13 @@ const App = () => {
       const currentUserId = currentUser.id;
       handleComment(userId, jokeId, comment, currentUserId);
       setData(await getAllData());
+      setRefresh(true);
+      triggerRefresh();
     } catch (error) {
       console.error('Error posting comment:', error);
     }
+    setRefresh(false);
+    await getAllData();
   };
 
   const handlePostJokeSubmit = async (joke: {setup: string; punchline: string }) => {
@@ -162,11 +177,15 @@ const App = () => {
     try {
       handlePostJoke(userId, joke.setup, joke.punchline);
       setData(await getAllData());
+      setRefresh(true);
       setIsPostJokeModalOpen(false);
+      triggerRefresh();
     } catch (error) {
       console.error('Error posting joke:', error);
 
     }
+    setRefresh(false);
+    await getAllData();
   };
 
   const handleAddFriend = async (userId: number) => {
@@ -175,9 +194,13 @@ const App = () => {
       setData(await getAllData());
       console.log('added: ',data)
       console.log('Friend added:', userId);
+      setRefresh(true);
+      triggerRefresh();
     } catch (error) {
       console.error('Error adding friend:', error);
     }
+    setRefresh(false);
+    await getAllData();
   };
 
   const handleRemoveFriend = async (userId: number) => {
@@ -186,9 +209,13 @@ const App = () => {
       setData(await getAllData());
       console.log('removed: ',data)
       console.log('Friend removed:', userId);
+      setRefresh(true);
+      triggerRefresh();
     } catch (error) {
       console.error('Error removing friend:', error);
     }
+    setRefresh(false);
+    await getAllData();
   };
 
   const handleLogin = (user: { email: string; password: string }) => {
