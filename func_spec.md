@@ -1,0 +1,49 @@
+# Functionality Specifications
+- ### Register page
+    - 3 input mező: 
+        - email, jélszó és jelszó megerősítés
+        - ha a 2 jelszó nem egyezik -> error message
+    - register button
+        - csak akkor lehet új fiókot csinálni, ha a feltétel teljesűl
+        - regisztráció után egyől belép és eldob a főoldalra
+- ### Login page
+    - 2 input
+        - email, jelszó 
+    - login button
+        - ha a megadott input stringek helyesek akkor belép az oldalra
+- ### NavBar
+    - logo ami kattintható, hogy elvigyen a feed-re
+    - search ami a felhasználók neve alapján keres, max 10 kis kártyát dob fel amire rákattintva elmehetünk a user profiljára
+    - post a joke button -> megjelenít egy dialog ablakot ahonnan egyszerűen tudunk egy joke-ot kiírni 2 input segítségével: setup and punchline, ha ezeknek a kitöltésével megvagyunk akkor a post Joke gombbal ki is tehetjük
+    - felhasználó icon, erre kattintva elviszi a felhasználót az oldalára
+- ### Joke Feed
+    - egymás alatt jelennek meg a viccek a legnépszerűbb legelől.
+- ### Joke Card
+    - header
+        - kis avatar
+        - név
+        - postolás dátuma
+        - the header is clickable -> elvisz a post-oló profiljára
+    - Content
+        - setup
+        - button -> megjeleníti vagy eltünteti a punchline-t
+    - footer
+        - like icon
+            - rá lehet kattintani ha már likeoltad akkor bekete a like gomb ha nem akkor csak a körvonala fekete, és ha like-oltad elveszi ha nem akkor hozzáad egyet és mutatja a like count-ot is
+        - comment icon
+            - lenyitja a comment-eket és mutatja hányan comment-eltek eddig
+            - minden commentnek meg lehet nézni hogy ki írta és mikor és hogy hány embernek tetszik ez a comment
+        - write a comment
+            - egy input mező 
+            - egy post comment button -> ha van írva valami az inputba akkor kiteszi egyől a neveddel és az aktuális idővel
+- ### User Profile
+    - profile card
+        - név 
+        - email
+        - bio
+        - jokes
+            - ha nem vagytok barátok akkor csak az első 5 legtöbbet like-olt joke-ját tudod megnézni, ha barátok vagytok akkor megjeleni egy gomb amivel tudod váltogatni hogy minden post-ját szeretnéd látni vagy csak a top postjait
+        - barát jelölés
+            - nem muszáj a másik embernek elfogadni a kérelmet, de akkor ha bejelölted a te barátaid között lesz és már láthatod az összes postját a profilján és a feed-eden is
+        - barát törlés
+            - ugyanott ahol be tudtad jelnölni ott megváltozik a gomb és mostantól, remove friend lesz ami törli a user-t a barátaid közül
